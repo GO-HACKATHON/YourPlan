@@ -25,6 +25,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.user.myapplication.ListPlanner" />
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAoRZFBazq233liByPF5BmGR8PUGOB14-A" />
+
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">

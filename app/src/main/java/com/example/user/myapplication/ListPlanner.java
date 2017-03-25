@@ -97,6 +97,7 @@ public class ListPlanner extends AppCompatActivity
 
         if( id == R.id.action_refresh){
             Intent intent = getIntent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             finish();
             startActivity(intent);
         }
@@ -111,7 +112,7 @@ public class ListPlanner extends AppCompatActivity
             super.onPreExecute();
             pDialog = new ProgressDialog(ListPlanner.this);
             pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(true);
+            pDialog.setCancelable(false);
             pDialog.show();
             listItem.clear();
         }
