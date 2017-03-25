@@ -1,7 +1,9 @@
 package com.example.user.myapplication;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -44,26 +46,29 @@ public class ListPlanner extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
                 Intent intent = new Intent(ListPlanner.this, CrudActivity.class);
                 startActivity(intent);
             }
         });
 
         listItem = new ArrayList<>();
-        listView = (ListView)findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
         listAdapter = new SimpleAdapter(
                 ListPlanner.this,
                 listItem,
                 R.layout.singleplan,
-                new String[] {"plan_name", "date", "time"},
-                new int[] {R.id.plan_name, R.id.date, R.id.time});
+                new String[]{"plan_name", "date", "time"},
+                new int[]{R.id.plan_name, R.id.date, R.id.time});
         listView.setAdapter(listAdapter);
 
-        new GetData().execute();
+//        new GetData().execute();
+    }
 
-        startService(new Intent(this, MyService.class));
+    @Override
+    protected void onPostResume()
+    {
+        super.onPostResume();
+        new GetData().execute();
     }
 
     @Override
@@ -88,21 +93,27 @@ public class ListPlanner extends AppCompatActivity
             return true;
         }
 
+        if (id == R.id.action_logout)
+        {
+            SharedPreferences sf = getApplicationContext().getSharedPreferences("LoginToken", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sf.edit();
+            editor.putString("jwt-auth-token", "");
+            editor.putString("Id", "");
+            editor.putString("Nama", "");
 
-        if( id == R.id.action_logout){
             Intent intent = new Intent(ListPlanner.this, LoginActivity.class);
             startActivity(intent);
             return true;
         }
 
-        if( id == R.id.action_refresh){
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
+        if (id == R.id.action_refresh)
+        {
+            new GetData().execute();
         }
 
         return super.onOptionsItemSelected(item);
     }
+
     class GetData extends AsyncTask<Void, Void, Void>
     {
         @Override
@@ -111,7 +122,6 @@ public class ListPlanner extends AppCompatActivity
             super.onPreExecute();
             pDialog = new ProgressDialog(ListPlanner.this);
             pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(true);
             pDialog.show();
             listItem.clear();
         }
@@ -126,11 +136,14 @@ public class ListPlanner extends AppCompatActivity
         }
 
         String jsonStr = "";
+
         @Override
         protected Void doInBackground(Void... params)
         {
             HttpHandler httpHandler = new HttpHandler();
-            jsonStr = httpHandler.makeCallService(getResources().getString(R.string.main_url) + ":8000/api/plan");
+            String idUser = (getApplicationContext().getSharedPreferences("LoginToken", Context.MODE_PRIVATE)).getString("Id", null);
+            jsonStr = httpHandler.makeCallService(getResources().getString(R.string.main_url) + ":8000/api/plan/" + idUser + "?token="
+                    + (getApplicationContext().getSharedPreferences("LoginToken", Context.MODE_PRIVATE)).getString("jwt-auth-token", null));
 
             if (jsonStr != null)
             {
@@ -162,7 +175,8 @@ public class ListPlanner extends AppCompatActivity
                 runOnUiThread(new Runnable()
                 {
                     @Override
-                    public void run() {
+                    public void run()
+                    {
                         Toast.makeText(getApplicationContext(), "Gagal Mendapatkan Data JSON Dari Server!", Toast.LENGTH_SHORT).show();
                     }
                 });

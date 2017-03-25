@@ -5,4 +5,7 @@
     <string name="action_logout">Logout</string>
     <string name="action_saveplan">Save</string>
     <string name="main_url">http://10.17.10.133</string>
+    <string name="sf_token"></string>
+    <string name="sf_id"></string>
+    <string name="sf_name"></string>
 </resources>
