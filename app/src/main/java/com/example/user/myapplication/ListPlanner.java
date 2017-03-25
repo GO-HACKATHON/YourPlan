@@ -109,6 +109,7 @@ public class ListPlanner extends AppCompatActivity
         if (id == R.id.action_refresh)
         {
             new GetData().execute();
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -122,6 +123,7 @@ public class ListPlanner extends AppCompatActivity
             super.onPreExecute();
             pDialog = new ProgressDialog(ListPlanner.this);
             pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
             pDialog.show();
             listItem.clear();
         }

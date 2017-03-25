@@ -13,71 +13,112 @@
     tools:showIn="@layout/activity_crud"
     android:id="@+id/layout_content_crud">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/plan_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="Plan Name..." />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/date"
-        android:hint="Date..."
-        android:layout_below="@+id/plan_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/plan_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:hint="Plan Name..." />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:id="@+id/time"
-        android:hint="Time..."
-        android:layout_below="@+id/plan_name"
-        android:layout_toRightOf="@+id/date"
-        android:layout_toEndOf="@+id/date" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/location"
-        android:layout_below="@+id/date"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/time"
-        android:layout_alignEnd="@+id/time"
-        android:hint="Location..." />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:ems="10"
+                android:id="@+id/date"
+                android:hint="Date..."
+                android:layout_below="@+id/plan_name"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/description"
-        android:layout_below="@+id/location"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/time"
-        android:layout_alignEnd="@+id/time"
-        android:hint="Description..." />
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:ems="10"
+                android:id="@+id/time"
+                android:hint="Time..."
+                android:layout_below="@+id/plan_name"
+                android:layout_toRightOf="@+id/date"
+                android:layout_toEndOf="@+id/date" />
+        </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/time_to_prepare"
-        android:layout_below="@+id/description"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/time"
-        android:layout_alignEnd="@+id/time"
-        android:hint="Time to prepare (min)..."/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/location"
+            android:layout_below="@+id/location"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/time"
+            android:layout_alignEnd="@+id/time"
+            android:hint="Location"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/latitude"
+            android:layout_below="@+id/location"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/time"
+            android:layout_alignEnd="@+id/time"
+            android:hint="Location"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/description"
+            android:layout_below="@+id/location"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/time"
+            android:layout_alignEnd="@+id/time"
+            android:hint="Description..." />
+
+<!--
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/time_to_prepare"
+            android:layout_below="@+id/description"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/time"
+            android:layout_alignEnd="@+id/time"
+            android:hint="Time to prepare (min)..."/>
+-->
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time_to_prepare"
+            android:spinnerMode="dialog"
+            android:layout_below="@+id/description"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="0.075" />
+    </LinearLayout>
 </RelativeLayout>
