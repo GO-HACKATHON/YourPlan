@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.user.myapplication.LoginActivity"
+    tools:context="com.example.user.myapplication.RegisterActivity"
     android:background="#efefef">
 
     <FrameLayout
@@ -42,9 +42,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editText6"
-                android:layout_above="@+id/editText4"
-                android:layout_centerHorizontal="true"
+                android:id="@+id/regName"
                 android:singleLine="false"
                 android:hint="Name"
                 android:gravity="center_horizontal"
@@ -55,9 +53,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editText5"
-                android:layout_above="@+id/editText4"
-                android:layout_centerHorizontal="true"
+                android:id="@+id/regEmail"
                 android:singleLine="false"
                 android:hint="Email"
                 android:gravity="center_horizontal" />
@@ -67,9 +63,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText4"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
+                android:id="@+id/regPassword"
                 android:hint="Password"
                 android:gravity="center_horizontal" />
 
@@ -78,9 +72,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText7"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
+                android:id="@+id/regConfirmPassword"
                 android:hint="Confirm Password"
                 android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal" />
@@ -102,7 +94,8 @@
                 android:layout_alignStart="@+id/editText4"
                 android:background="@color/colorPrimary"
                 android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:onClick="register"/>
 
         </LinearLayout>
 
