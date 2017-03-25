@@ -3,9 +3,13 @@ package com.example.user.myapplication;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.location.Geocoder;
+
+import android.content.Context;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -259,7 +263,7 @@ public class CrudActivity extends AppCompatActivity
             String plan_address = "Dimana Aja";
             String lat = "-6.245586";
             String lng = "106.798531";
-            String id_user = "1";
+            String id_user = (getApplicationContext().getSharedPreferences("LoginToken", Context.MODE_PRIVATE)).getString("Id", null);
 
             new AddData().execute(plan_name, date, time, description, time_to_prepare,
                     plan_place, plan_address,
@@ -293,7 +297,7 @@ public class CrudActivity extends AppCompatActivity
                 public void run()
                 {
                     CrudActivity.this.finish();
-                    
+
                 }
             });
         }
@@ -319,6 +323,7 @@ public class CrudActivity extends AppCompatActivity
             {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(getResources().getString(R.string.main_url) + ":8000/api/plan/insert");
+                httpPost.setHeader("Authorization", "Bearer " + (getApplicationContext().getSharedPreferences("LoginToken", Context.MODE_PRIVATE)).getString("jwt-auth-token", null));
                 httpPost.setEntity(new UrlEncodedFormEntity(values));
                 HttpResponse response = httpClient.execute(httpPost);
                 HttpEntity entity = response.getEntity();
@@ -331,6 +336,7 @@ public class CrudActivity extends AppCompatActivity
                     sb.append(line + "\n");
                 }
                 result = sb.toString();
+                Log.d(null, result);//            jsonStr = httpHandler.makeCallService(getResources().getString(R.string.main_url) + ":8000/api/plan/" + idUser
             }
             catch (Exception e)
             {
