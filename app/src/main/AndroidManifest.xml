@@ -28,5 +28,5 @@
                 android:value="com.example.user.myapplication.ListPlanner"></meta-data>
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
