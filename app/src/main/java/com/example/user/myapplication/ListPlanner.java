@@ -61,6 +61,8 @@ public class ListPlanner extends AppCompatActivity
         listView.setAdapter(listAdapter);
 
         new GetData().execute();
+
+        startService(new Intent(this, MyService.class));
     }
 
     @Override
@@ -83,6 +85,18 @@ public class ListPlanner extends AppCompatActivity
         if (id == R.id.action_settings)
         {
             return true;
+        }
+
+        if( id == R.id.action_logout){
+            Intent intent = new Intent(ListPlanner.this, LoginActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if( id == R.id.action_refresh){
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

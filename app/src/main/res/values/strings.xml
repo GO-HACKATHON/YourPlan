@@ -2,6 +2,7 @@
     <string name="app_name">Plan List</string>
     <string name="crud">Add New Plan</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
     <string name="action_saveplan">Save</string>
     <string name="main_url">http://10.17.10.133</string>
 </resources>
