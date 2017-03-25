@@ -67,6 +67,13 @@ public class ListPlanner extends AppCompatActivity
     }
 
     @Override
+    protected void onPostResume()
+    {
+        super.onPostResume();
+        new GetData().execute();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.

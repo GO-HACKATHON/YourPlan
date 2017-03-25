@@ -92,7 +92,7 @@ public class CrudActivity extends AppCompatActivity
                 public void run()
                 {
                     CrudActivity.this.finish();
-                    
+
                 }
             });
         }
