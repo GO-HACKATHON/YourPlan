@@ -10,27 +10,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.user.myapplication.ListPlanner"
-    tools:showIn="@layout/activity_crud">
+    tools:showIn="@layout/activity_crud"
+    android:id="@+id/layout_content_crud">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/name_field"
+        android:id="@+id/plan_name"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Plan Name" />
+        android:hint="Plan Name..." />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
-        android:id="@+id/date_field"
-        android:hint="Date"
-        android:layout_below="@+id/name_field"
+        android:id="@+id/date"
+        android:hint="Date..."
+        android:layout_below="@+id/plan_name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -39,45 +40,44 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/time_"
-        android:hint="Time"
-        android:layout_below="@+id/name_field"
-        android:layout_toRightOf="@+id/date_field"
-        android:layout_toEndOf="@+id/date_field" />
+        android:id="@+id/time"
+        android:hint="Time..."
+        android:layout_below="@+id/plan_name"
+        android:layout_toRightOf="@+id/date"
+        android:layout_toEndOf="@+id/date" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:layout_below="@+id/date_field"
+        android:id="@+id/location"
+        android:layout_below="@+id/date"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/time_"
-        android:layout_alignEnd="@+id/time_"
-        android:hint="Location" />
+        android:layout_alignRight="@+id/time"
+        android:layout_alignEnd="@+id/time"
+        android:hint="Location..." />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
+        android:id="@+id/description"
+        android:layout_below="@+id/location"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/time_"
-        android:layout_alignEnd="@+id/time_"
-        android:hint="Description" />
+        android:layout_alignRight="@+id/time"
+        android:layout_alignEnd="@+id/time"
+        android:hint="Description..." />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/editText2"
+        android:id="@+id/time_to_prepare"
+        android:layout_below="@+id/description"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/time_"
-        android:layout_alignEnd="@+id/time_"
-        android:hint="Time to prepare (min)"/>
-
+        android:layout_alignRight="@+id/time"
+        android:layout_alignEnd="@+id/time"
+        android:hint="Time to prepare (min)..."/>
 </RelativeLayout>

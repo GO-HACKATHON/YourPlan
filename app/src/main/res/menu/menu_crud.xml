@@ -2,10 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.user.myapplication.ListPlanner">
+
    <item
-        android:id="@+id/action_saveplan"
-        android:orderInCategory="0"
-        android:icon="@android:drawable/ic_menu_save"
-        android:title="@string/action_saveplan"
-        app:showAsAction="always" />
+      android:id="@+id/action_saveplan"
+      android:orderInCategory="0"
+      android:icon="@drawable/ic_check_black_24dp"
+      android:title="@string/action_saveplan"
+      app:showAsAction="always" />
 </menu>

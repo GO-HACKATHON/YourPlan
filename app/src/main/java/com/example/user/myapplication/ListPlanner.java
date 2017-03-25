@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -87,6 +88,7 @@ public class ListPlanner extends AppCompatActivity
             return true;
         }
 
+
         if( id == R.id.action_logout){
             Intent intent = new Intent(ListPlanner.this, LoginActivity.class);
             startActivity(intent);
@@ -101,7 +103,6 @@ public class ListPlanner extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
     class GetData extends AsyncTask<Void, Void, Void>
     {
         @Override
