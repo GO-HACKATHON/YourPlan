@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity
         {
             super.onPreExecute();
             pDialog = new ProgressDialog(LoginActivity.this);
+            pDialog.setCancelable(false);
             pDialog.setMessage("Please wait...");
             pDialog.show();
         }

@@ -3,25 +3,19 @@ package com.example.user.myapplication;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-
 import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.location.Geocoder;
-
 import android.content.Context;
-
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -32,7 +26,6 @@ import android.widget.Toast;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.identity.intents.Address;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
@@ -46,7 +39,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -63,20 +55,17 @@ public class CrudActivity extends AppCompatActivity
     private TextView dateView;
     private TextView timeView;
     private int year, month, day, name_month, hour, minute;
+    String pLat = "";
+    String pLng = "";
+    String pPlace = "";
+    String pAddress = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crud);
-//
-//        location1 = (TextView)findViewById(R.id.location);
-//        location1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//
-//            }
-//        });
+
         EditText location = (EditText) findViewById(R.id.location);
         location.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -87,14 +76,7 @@ public class CrudActivity extends AppCompatActivity
 
                 return false;
             }
-
         });
-//        location.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                findPlace(v);
-//            }
-//        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
@@ -104,8 +86,10 @@ public class CrudActivity extends AppCompatActivity
         dateView.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            public boolean onTouch(View v, MotionEvent event)
+            {
+                if (event.getAction() == MotionEvent.ACTION_DOWN)
+                {
                     setDate(v);
                 }
                 return false;
@@ -121,7 +105,6 @@ public class CrudActivity extends AppCompatActivity
                 }
                 return false;
             }
-
         });
 
         calendar = Calendar.getInstance();
@@ -131,7 +114,6 @@ public class CrudActivity extends AppCompatActivity
         day = calendar.get(Calendar.DAY_OF_MONTH);
         hour = calendar.get(Calendar.HOUR);
         minute = calendar.get(Calendar.MINUTE);
-
 
         showDate(year,month + 1, day);
         showTime(hour,minute);
@@ -162,15 +144,12 @@ public class CrudActivity extends AppCompatActivity
             if (resultCode == RESULT_OK) {
                 // retrive the data by using getPlace() method.
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.e("Tag", "Place: " + place.getAddress() + place.getPhoneNumber());
+                pPlace = place.getName().toString();
+                pAddress = place.getAddress().toString();
+                pLat = String.valueOf(place.getLatLng().latitude);
+                pLng = String.valueOf(place.getLatLng().longitude);
 
-
-                ((EditText) findViewById(R.id.location))
-                        .setText(place.getName()+",\n"+
-                                place.getAddress());
-
-                String pLat = String.valueOf(place.getLatLng().latitude);
-                String pLng = String.valueOf(place.getLatLng().longitude);
+                ((EditText)findViewById(R.id.location)).setText(pPlace + " , " + pAddress);
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
@@ -259,15 +238,11 @@ public class CrudActivity extends AppCompatActivity
             String time = ((EditText)findViewById(R.id.time)).getText().toString();
             String description = ((EditText)findViewById(R.id.description)).getText().toString();
             String time_to_prepare = ((Spinner)findViewById(R.id.time_to_prepare)).getSelectedItem().toString();
-            String plan_place = "Test Tempat";
-            String plan_address = "Dimana Aja";
-            String lat = "-6.245586";
-            String lng = "106.798531";
             String id_user = (getApplicationContext().getSharedPreferences("LoginToken", Context.MODE_PRIVATE)).getString("Id", null);
 
             new AddData().execute(plan_name, date, time, description, time_to_prepare,
-                    plan_place, plan_address,
-                    lat, lng, id_user);
+                    pPlace, pAddress,
+                    pLat, pLng, id_user);
         }
         return super.onOptionsItemSelected(item);
     }
